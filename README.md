@@ -1,6 +1,6 @@
 # comision-21646-B-soria-vanesa-paola
 
-# Mi Proyecto: DePeoncitosYReinas. Foro de Ajedrez para Niños
+# Mi Proyecto: DePeoncitosYReinas.com (Foro de Ajedrez para Niños)
 
 Este proyecto es un foro web diseñado para fomentar el interés en el ajedrez entre niños y niñas de 6 a 15 años. Permite a los usuarios crear y compartir publicaciones sobre ajedrez de manera divertida y educativa.
 

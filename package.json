@@ -1,5 +1,30 @@
 {
+  "name": "comision-21646-b-soria-vanesa-paola",
+  "description": "Este proyecto es un foro web diseñado para fomentar el interés en el ajedrez entre niños y niñas de 6 a 15 años. Permite a los usuarios crear y compartir publicaciones sobre ajedrez de manera divertida y educativa.",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanehit/comision-21646-B-soria-vanesa-paola.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanehit/comision-21646-B-soria-vanesa-paola/issues"
+  },
+  "homepage": "https://github.com/vanehit/comision-21646-B-soria-vanesa-paola#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
   "dependencies": {
-    "express": "^4.18.2"
+    "bootstrap": "^5.3.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
   }
 }

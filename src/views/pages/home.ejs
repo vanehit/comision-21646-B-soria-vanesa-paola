@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DePeoncitosYReinas.com</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"> <!-- Enlaza a Bootstrap CSS desde la ubicación de node_modules -->
+  <link rel="stylesheet" href="/css/styles.css"> <!-- Enlaza a tu archivo CSS personalizado -->
+</head>
+<body>
+
+  <!-- Incluye el encabezado desde el archivo parcial -->
+  <%- include('../partials/header.ejs') %>
+
+  <!-- Contenido principal -->
+  <section class="hero bg-dark text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Bienvenido a DePeoncitosYReinas.com</h1>
+      <p class="lead">El lugar donde los amantes del ajedrez se reúnen.</p>
+      <a href="/chess-posts" class="btn btn-primary btn-lg">Explorar Publicaciones</a>
+    </div>
+  </section>
+
+  <section class="featured-posts">
+    <!-- Aquí puedes mostrar publicaciones destacadas -->
+    <!-- Utiliza un bucle EJS para mostrarlas dinámicamente -->
+  </section>
+
+  <!-- Incluye el pie de página desde el archivo parcial -->
+  <%- include('../partials/footer.ejs') %>
+
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- Incluye Bootstrap JavaScript desde la ubicación de node_modules -->
+</body>
+</html>
