@@ -1,12 +1,9 @@
 import express from 'express';
+import homeController from '../controllers/homeController.js';
 
-const router = express.Router(); 
+const router = express.Router();
 
-// Definir las rutas principales
-router.get('/', (req, res) => {
-  res.render('pages/home');
-});
+// Ruta principal: Muestra la página de inicio
+router.get('/', homeController);
 
-
-
-export { router }; // Exporta el objeto router correctamente
+export default router;

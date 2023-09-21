@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DePeoncitosYReinas.com</title>
+  <link rel="icon" href="/public/images/reina.ico" type="image/x-icon" />
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"> <!-- Enlaza a Bootstrap CSS desde la ubicación de node_modules -->
   <link rel="stylesheet" href="/css/styles.css"> <!-- Enlaza a tu archivo CSS personalizado -->
 </head>
@@ -13,6 +14,34 @@
   <%- include('../partials/header.ejs') %>
 
   <!-- Contenido principal -->
+  <!-- Encabezado -->
+  <header class="bg-light text-dark text-center py-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Imagen a la izquierda -->
+            <div class="col-md-4">
+                <img src="/public/images/laptop-screen.png" alt="Ajedrez" class="img-fluid">
+            </div>
+            <!-- Texto en el centro -->
+            <div class="col-md-4">
+                <p class="lead">
+                    Play Chess on the #1 site!<br>
+                    Play with people from around the world<br>
+                    Improve with a brand new Learning Center<br>
+                    Watch thousands of top-quality video lessons<br>
+                    Learn from the world’s best masters<br>
+                    Impromptu tournaments and live event coverage<br>
+                    Best Support anywhere!
+                </p>
+            </div>
+            <!-- Botón "SIGN UP" a la derecha -->
+            <div class="col-md-4">
+                <a href="/signup" class="btn btn-primary btn-lg">SIGN UP</a>
+            </div>
+        </div>
+    </div>
+  </header>
+
   <section class="hero bg-dark text-white text-center py-5">
     <div class="container">
       <h1 class="display-4">Bienvenido a DePeoncitosYReinas.com</h1>
@@ -22,13 +51,18 @@
   </section>
 
   <section class="featured-posts">
-    <!-- Aquí puedes mostrar publicaciones destacadas -->
-    <!-- Utiliza un bucle EJS para mostrarlas dinámicamente -->
+    <% featuredPosts.forEach((post) => { %>
+      <div class="post">
+        <h2><%= post.title %></h2>
+        <p><%= post.content %></p>
+      </div>
+    <% }); %>
   </section>
+  
 
   <!-- Incluye el pie de página desde el archivo parcial -->
   <%- include('../partials/footer.ejs') %>
 
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- Incluye Bootstrap JavaScript desde la ubicación de node_modules -->
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>
