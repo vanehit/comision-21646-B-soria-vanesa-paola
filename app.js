@@ -1,29 +1,35 @@
 import express from 'express';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import path from 'path';
-import homeRoutes from './src/routes/homeRoutes.js';
+import router from './src/backend/routes/routes.js';
+import { startDb } from './src/backend/config/database.js';
 
 
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Middleware para analizar JSON
+app.use(express.json());
 
+// Configura el motor de vistas EJS
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, ''));
 
-app.use(express.static('public'));
+// Configurar rutas del frontend para servir páginas HTML y recursos estáticos
+app.use(express.static(path.join(__dirname, 'frontend/public')));
 
-app.use('/', homeRoutes);
+// Define las rutas
+app.use('/', router);
 
-
+// Manejamos los errores 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  res.status(500).send(`Error interno del servidor: ${err.message}`);
+
+  next();
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
   console.log(`Server is running in port: ${port}`);
+  startDb();
 });
