@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database';
 
-const postSchema = sequelize.define('postSchema', {
+const postModel = sequelize.define('post', {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -16,4 +16,4 @@ const postSchema = sequelize.define('postSchema', {
   },
 });
 
-export default postSchema;
+export default postModel;

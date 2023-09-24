@@ -1,99 +1,63 @@
-import postSchema from '../models/postSchema';
+import postSchema from '../models/posts';
 
-// Mostrar una lista de todas las publicaciones
-const getAllPostsController = async (req, res) => {
+// Controller para obtener todas las publicaciones
+export const getAllPostsController = async (req, res) => {
   try {
     const posts = await postSchema.findAll();
-    res.render('pages/posts', { posts });
+    return res.status(200).json(posts);
   } catch (error) {
-    console.error('Error al obtener las publicaciones:', error);
-    res.status(500).send('Error interno del servidor');
+    console.error(error);
+    return res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
 
-// Mostrar el formulario para crear una nueva publicación
-const showCreateFormController = (req, res) => {
-  res.render('pages/create-post');
-};
-
-// Crear una nueva publicación
-const createPostController = async (req, res) => {
-  const { title, content } = req.body;
-
+// Controller para crear una nueva publicación
+export const createPostController = async (req, res) => {
   try {
-    const newPost = await postSchema.create({ title, content });
-    res.redirect('/posts'); // Redirigir a la lista de publicaciones
+    const newPost = await postSchema.create(req.body);
+    return res.status(201).json(newPost);
   } catch (error) {
-    console.error('Error al crear una nueva publicación:', error);
-    res.status(500).send('Error interno del servidor');
+    console.error(error);
+    return res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
 
-// Mostrar el formulario para editar una publicación existente
-const showEditFormController = async (req, res) => {
-  const postId = req.params.id;
-
+// Controller para actualizar una publicación existente
+export const updatePostController = async (req, res) => {
+  const { id } = req.params;
   try {
-    const post = await postSchema.findByPk(postId);
+    const post = await postSchema.findByPk(id);
 
     if (!post) {
-      return res.status(404).send('Publicación no encontrada');
+      return res.status(404).json({ message: 'Publicación no encontrada' });
     }
 
-    res.render('pages/edit-post', { post });
+    await post.update(req.body);
+
+    return res.status(200).json(post);
   } catch (error) {
-    console.error('Error al obtener la publicación para editar:', error);
-    res.status(500).send('Error interno del servidor');
+    console.error(error);
+    return res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
 
-// Actualizar una publicación existente
-const updatePostController = async (req, res) => {
-  const postId = req.params.id;
-  const { title, content } = req.body;
-
+// Controller para eliminar una publicación
+export const deletePostController = async (req, res) => {
+  const { id } = req.params;
   try {
-    const post = await postSchema.findByPk(postId);
+    const postDeleted = await postSchema.destroy({
+      where: {
+        id: id,
+      },
+    });
 
-    if (!post) {
-      return res.status(404).send('Publicación no encontrada');
+    if (!postDeleted) {
+      return res.status(404).json({ message: 'Publicación no encontrada' });
     }
 
-    post.title = title;
-    post.content = content;
-
-    await post.save();
-    res.redirect('/posts');
+    return res.status(200).json({ message: 'Publicación eliminada' });
   } catch (error) {
-    console.error('Error al actualizar la publicación:', error);
-    res.status(500).send('Error interno del servidor');
+    console.error(error);
+    return res.status(500).json({ message: 'Error interno del servidor' });
   }
-};
-
-// Eliminar una publicación existente
-const deletePostController = async (req, res) => {
-  const postId = req.params.id;
-
-  try {
-    const post = await postSchema.findByPk(postId);
-
-    if (!post) {
-      return res.status(404).send('Publicación no encontrada');
-    }
-
-    await post.destroy();
-    res.redirect('/posts');
-  } catch (error) {
-    console.error('Error al eliminar la publicación:', error);
-    res.status(500).send('Error interno del servidor');
-  }
-};
-
-export default {
-  getAllPostsController,
-  showCreateFormController,
-  createPostController,
-  showEditFormController,
-  updatePostController,
-  deletePostController,
 };
